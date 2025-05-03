@@ -19,14 +19,14 @@ const RawTextInput: React.FC<RawTextInputProps> = ({ onRawTextChange }) => {
   return (
     <div className="cyber-panel flex flex-col gap-4">
       <div className="flex justify-between items-center">
-        <h2 className="text-lg font-semibold cyber-text-glow flex items-center gap-2 text-cyber-mutedLight">
+        <h2 className="text-lg font-semibold cyber-text-glow flex items-center gap-2 text-seal_brown-700">
           <Text className="h-5 w-5" />
           <span>Paste Raw Data</span>
         </h2>
       </div>
       
       <textarea
-        className="flex-1 min-h-[200px] cyber-input font-mono text-sm resize-y border-cyber-muted"
+        className="flex-1 min-h-[200px] cyber-input font-mono text-sm resize-y border-seal_brown-400"
         placeholder="Paste raw .pcap or log data here..."
         value={rawText}
         onChange={handleTextChange}
@@ -35,7 +35,7 @@ const RawTextInput: React.FC<RawTextInputProps> = ({ onRawTextChange }) => {
       
       <div className="flex flex-col gap-2">
         <TokenCounter text={rawText} maxTokens={3000} />
-        <p className="text-xs text-muted-foreground">
+        <p className="text-xs text-russet-700">
           Paste your raw data here to parse it using the specified algorithm.
         </p>
       </div>

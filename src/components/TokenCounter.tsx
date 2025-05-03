@@ -14,9 +14,9 @@ const TokenCounter: React.FC<TokenCounterProps> = ({ text, maxTokens = 3000 }) =
   
   // Determine color based on percentage
   const getStatusColor = () => {
-    if (percentage < 70) return 'text-cyber-mutedLight';
-    if (percentage < 90) return 'text-cyber-amber';
-    return 'text-cyber-orange';
+    if (percentage < 70) return 'text-seal_brown-700';
+    if (percentage < 90) return 'text-lion-500';
+    return 'text-russet-600';
   };
   
   return (
@@ -25,25 +25,25 @@ const TokenCounter: React.FC<TokenCounterProps> = ({ text, maxTokens = 3000 }) =
         <span className={cn("font-mono", getStatusColor())}>
           ~{tokenCount.toLocaleString()} tokens
         </span>
-        <span className="text-muted-foreground">
+        <span className="text-russet-700">
           Max {maxTokens.toLocaleString()}
         </span>
       </div>
       
-      <div className="h-1.5 w-full bg-cyber-darker rounded-full overflow-hidden">
+      <div className="h-1.5 w-full bg-seal_brown-300 rounded-full overflow-hidden">
         <div 
           className={cn(
             "h-full rounded-full transition-all duration-300",
-            percentage < 70 ? 'bg-cyber-mutedLight' : 
-            percentage < 90 ? 'bg-cyber-amber' : 
-            'bg-cyber-orange'
+            percentage < 70 ? 'bg-seal_brown-600' : 
+            percentage < 90 ? 'bg-lion-500' : 
+            'bg-russet-600'
           )}
           style={{ width: `${percentage}%` }}
         />
       </div>
       
       {tokenCount > maxTokens && (
-        <p className="text-xs text-cyber-orange mt-1">
+        <p className="text-xs text-russet-600 mt-1">
           Warning: Exceeds recommended token limit
         </p>
       )}

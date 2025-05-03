@@ -5,33 +5,33 @@
 
 @layer base {
   :root {
-    --background: 222 47% 11%;
-    --foreground: 210 40% 98%;
+    --background: 27 73% 20%;
+    --foreground: 46 21% 64%;
 
-    --card: 222 47% 11%;
-    --card-foreground: 210 40% 98%;
+    --card: 27 73% 20%;
+    --card-foreground: 46 21% 64%;
 
-    --popover: 222 47% 11%;
-    --popover-foreground: 210 40% 98%;
+    --popover: 27 73% 20%;
+    --popover-foreground: 46 21% 64%;
 
-    --primary: 26 72% 21%; /* Updated to muted brown tone */
-    --primary-foreground: 210 40% 98%;
+    --primary: 27 44% 40%; /* Raw umber */
+    --primary-foreground: 46 21% 64%;
 
-    --secondary: 196 33% 24%;
-    --secondary-foreground: 210 40% 98%;
+    --secondary: 74 19% 36%;
+    --secondary-foreground: 46 21% 64%;
 
-    --muted: 27 50% 25%; /* Updated to match new muted color scheme */
-    --muted-foreground: 27 30% 70%;
+    --muted: 27 56% 32%; /* Russet */
+    --muted-foreground: 35 27% 62%;
 
-    --accent: 26 54% 31%; /* Updated to muted brown accent */
-    --accent-foreground: 210 40% 98%;
+    --accent: 30 44% 40%; /* Raw umber */
+    --accent-foreground: 46 21% 64%;
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
 
-    --border: 26 40% 20%; /* Updated border color */
-    --input: 26 40% 20%;
-    --ring: 26 72% 21%;
+    --border: 27 44% 25%; /* Updated border color */
+    --input: 27 44% 25%;
+    --ring: 27 44% 30%;
 
     --radius: 0.5rem;
   }
@@ -51,8 +51,8 @@
   }
 
   .glow-border {
-    box-shadow: 0 0 5px theme('colors.cyber.glow'), 
-                inset 0 0 2px theme('colors.cyber.glow');
+    box-shadow: 0 0 5px theme('colors.seal_brown.600'), 
+                inset 0 0 2px theme('colors.seal_brown.600');
   }
 }
 
@@ -77,27 +77,27 @@
 /* Custom components for cyberpunk theme */
 @layer components {
   .cyber-panel {
-    @apply bg-cyber-dark border border-cyber-muted border-opacity-50 rounded-md p-4 relative overflow-hidden;
+    @apply bg-seal_brown-200 border border-seal_brown-400 border-opacity-50 rounded-md p-4 relative overflow-hidden;
     box-shadow: 0 0 10px rgba(88, 47, 14, 0.25);
   }
   
   .cyber-input {
-    @apply bg-cyber-darker border border-cyber-muted rounded-md p-2 focus:outline-none focus:ring-1 focus:ring-cyber-mutedLight;
+    @apply bg-seal_brown-100 border border-seal_brown-400 rounded-md p-2 focus:outline-none focus:ring-1 focus:ring-seal_brown-600;
   }
   
   .cyber-button {
-    @apply px-4 py-2 border border-cyber-muted bg-cyber-dark hover:bg-opacity-80 active:bg-opacity-100 text-foreground rounded transition duration-200 flex items-center gap-2;
+    @apply px-4 py-2 border border-seal_brown-500 bg-seal_brown-200 hover:bg-opacity-80 active:bg-opacity-100 text-foreground rounded transition duration-200 flex items-center gap-2;
   }
   
   .cyber-button-highlight {
-    @apply px-4 py-2 bg-cyber-muted hover:bg-opacity-80 active:bg-opacity-100 text-primary-foreground rounded transition duration-200 flex items-center gap-2;
+    @apply px-4 py-2 bg-raw_umber-500 hover:bg-opacity-80 active:bg-opacity-100 text-khaki-500 rounded transition duration-200 flex items-center gap-2;
   }
 
   .cyber-border {
-    @apply border border-cyber-muted border-opacity-50;
+    @apply border border-seal_brown-400 border-opacity-50;
   }
   
   .cyber-text-glow {
-    text-shadow: 0 0 5px rgba(88, 47, 14, 0.5);
+    text-shadow: 0 0 5px rgba(159, 85, 25, 0.5);
   }
 }
