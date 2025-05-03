@@ -67,7 +67,7 @@ To ensure full data privacy:
 firulais/
 ├── node_modules/              # Project dependencies
 ├── public/                    # Static assets
-├── src/                       # Source code (React + TypeScript)
+├── src/Utils/ExampleData      # Source code and Example data (React + TypeScript)
 ├── .gitignore
 ├── bun.lockb
 ├── components.json
