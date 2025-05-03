@@ -14,7 +14,7 @@ const TokenCounter: React.FC<TokenCounterProps> = ({ text, maxTokens = 3000 }) =
   
   // Determine color based on percentage
   const getStatusColor = () => {
-    if (percentage < 70) return 'text-cyber-blue';
+    if (percentage < 70) return 'text-cyber-mutedLight';
     if (percentage < 90) return 'text-cyber-amber';
     return 'text-cyber-orange';
   };
@@ -34,7 +34,7 @@ const TokenCounter: React.FC<TokenCounterProps> = ({ text, maxTokens = 3000 }) =
         <div 
           className={cn(
             "h-full rounded-full transition-all duration-300",
-            percentage < 70 ? 'bg-cyber-blue' : 
+            percentage < 70 ? 'bg-cyber-mutedLight' : 
             percentage < 90 ? 'bg-cyber-amber' : 
             'bg-cyber-orange'
           )}

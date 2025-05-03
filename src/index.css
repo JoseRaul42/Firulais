@@ -14,24 +14,24 @@
     --popover: 222 47% 11%;
     --popover-foreground: 210 40% 98%;
 
-    --primary: 174 42% 40%;
+    --primary: 26 72% 21%; /* Updated to muted brown tone */
     --primary-foreground: 210 40% 98%;
 
     --secondary: 196 33% 24%;
     --secondary-foreground: 210 40% 98%;
 
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
+    --muted: 27 50% 25%; /* Updated to match new muted color scheme */
+    --muted-foreground: 27 30% 70%;
 
-    --accent: 197 24% 54%;
+    --accent: 26 54% 31%; /* Updated to muted brown accent */
     --accent-foreground: 210 40% 98%;
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
 
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 174 42% 40%;
+    --border: 26 40% 20%; /* Updated border color */
+    --input: 26 40% 20%;
+    --ring: 26 72% 21%;
 
     --radius: 0.5rem;
   }
@@ -77,27 +77,27 @@
 /* Custom components for cyberpunk theme */
 @layer components {
   .cyber-panel {
-    @apply bg-cyber-dark border border-primary border-opacity-50 rounded-md p-4 relative overflow-hidden;
-    box-shadow: 0 0 10px rgba(74, 222, 128, 0.15);
+    @apply bg-cyber-dark border border-cyber-muted border-opacity-50 rounded-md p-4 relative overflow-hidden;
+    box-shadow: 0 0 10px rgba(88, 47, 14, 0.25);
   }
   
   .cyber-input {
-    @apply bg-cyber-darker border border-primary rounded-md p-2 focus:outline-none focus:ring-1 focus:ring-primary;
+    @apply bg-cyber-darker border border-cyber-muted rounded-md p-2 focus:outline-none focus:ring-1 focus:ring-cyber-mutedLight;
   }
   
   .cyber-button {
-    @apply px-4 py-2 border border-primary bg-cyber-dark hover:bg-opacity-80 active:bg-opacity-100 text-foreground rounded transition duration-200 flex items-center gap-2;
+    @apply px-4 py-2 border border-cyber-muted bg-cyber-dark hover:bg-opacity-80 active:bg-opacity-100 text-foreground rounded transition duration-200 flex items-center gap-2;
   }
   
   .cyber-button-highlight {
-    @apply px-4 py-2 bg-primary hover:bg-opacity-80 active:bg-opacity-100 text-primary-foreground rounded transition duration-200 flex items-center gap-2;
+    @apply px-4 py-2 bg-cyber-muted hover:bg-opacity-80 active:bg-opacity-100 text-primary-foreground rounded transition duration-200 flex items-center gap-2;
   }
 
   .cyber-border {
-    @apply border border-primary border-opacity-50;
+    @apply border border-cyber-muted border-opacity-50;
   }
   
   .cyber-text-glow {
-    text-shadow: 0 0 5px rgba(74, 222, 128, 0.5);
+    text-shadow: 0 0 5px rgba(88, 47, 14, 0.5);
   }
 }

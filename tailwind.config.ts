@@ -62,7 +62,10 @@ export default {
           amber: "#F4A261",
           yellow: "#E9C46A",
           orange: "#E76F51",
-          glow: "#4ECCA3"
+          glow: "#4ECCA3",
+          muted: "#582F0E", // New muted brown color
+          mutedLight: "#7C4C23", // Lighter variant of muted brown
+          mutedDark: "#3D1F09" // Darker variant of muted brown
         }
       },
       borderRadius: {
