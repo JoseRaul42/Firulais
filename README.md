@@ -65,14 +65,25 @@ To ensure full data privacy:
 
 ```
 firulais/
-├── ExampleData/         # Example Snort alert logs to test with
-├── src/                 # React source code
-│   ├── components/      # UI components
-│   └── utils/           # Log parsing & summarization logic
-├── public/              # Static assets
-├── vite.config.ts       # Vite configuration
-└── README.md
+├── node_modules/              # Project dependencies
+├── public/                    # Static assets
+├── src/                       # Source code (React + TypeScript)
+├── .gitignore
+├── bun.lockb
+├── components.json
+├── eslint.config.js
+├── index.html
+├── package-lock.json
+├── package.json
+├── postcss.config.js
+├── README.md
+├── tailwind.config.ts
+├── tsconfig.app.json
+├── tsconfig.json
+├── tsconfig.node.json
+└── vite.config.ts
 ```
+
 
 ---
 
