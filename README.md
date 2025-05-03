@@ -30,14 +30,14 @@ Whether you're trying to understand your network's behavior or compress verbose 
 
 1. **Clone the project and install dependencies**
    ```bash
-   git clone https://github.com/your-username/firulais.git
+   git clone https://github.com/JoseRaul42/Firulais.git
    cd firulais
    npm install
    npm run dev
    ```
 
 2. **Open the app**  
-   Visit `http://localhost:5173` in your browser.
+   Visit `http://localhost:8080` in your browser.
 
 3. **Load data**
    - You can use your own Snort alert log file.
