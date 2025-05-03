@@ -72,7 +72,7 @@ const LlmChat: React.FC<LlmChatProps> = ({ parsedContext, llmEndpoint, isConnect
   return (
     <div className="cyber-panel flex flex-col gap-2">
       <h2 className="text-sm font-medium cyber-text-glow mb-1">
-        Tactical LLM Interface
+        LLM Interface
       </h2>
       
       <ScrollArea className="flex-1 h-[400px] rounded border border-seal_brown-400 border-opacity-50 p-2 bg-ebony-100">
