@@ -66,14 +66,14 @@ async function callOpenAI(message: string, context: string[], apiKey: string): P
         messages: [
           {
             role: 'system',
-            content: 'You are a cybersecurity assistant analyzing network traffic and alerts. Be concise and helpful.'
+            content: 'You are a cybersecurity assistant analyzing network traffic and alerts. Only state facts that can be directly inferred from the data provided. Do not speculate. Be concise, objective, and helpful in your summaries. Focus on identifying protocols, IP addresses, suspicious behavior, or rule triggers. If no meaningful information is found, respond with "No notable activity detected."'
           },
           {
             role: 'user',
             content: fullPrompt
           }
         ],
-        max_tokens: 500
+        max_tokens: 3000
       })
     });
 
@@ -117,7 +117,7 @@ async function callLocalLLM(message: string, context: string[], endpoint: string
         messages: [
           {
             role: 'system',
-            content: 'You are a cybersecurity assistant analyzing network traffic and alerts. Be concise and helpful.'
+            content: 'You are a cybersecurity assistant analyzing network traffic and alerts. Only state facts that can be directly inferred from the data provided. Do not speculate. Be concise, objective, and helpful in your summaries. Focus on identifying protocols, IP addresses, suspicious behavior, or rule triggers. If no meaningful information is found, respond with "No notable activity detected."'
           },
           {
             role: 'user',
@@ -125,7 +125,7 @@ async function callLocalLLM(message: string, context: string[], endpoint: string
           }
         ],
         temperature: 0.1,
-        max_tokens: 500
+        max_tokens: 3000
       })
     });
 

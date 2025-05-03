@@ -29,7 +29,7 @@ const Index = () => {
       <header className="py-3 px-3 md:px-5 border-b border-primary border-opacity-30">
         <div className="max-w-7xl mx-auto">
           <h1 className="text-xl font-bold tracking-tight cyber-text-glow">
-            Firulais
+            Firulais 🐶
           </h1>
           <p className="text-xs text-muted-foreground mt-0.5">
             Parse, condense, and optimize .pcap files for LLM processing
@@ -85,7 +85,7 @@ const Index = () => {
 
       <footer className="py-2 px-3 md:px-5 border-t border-primary border-opacity-30 text-center text-xxs text-muted-foreground">
         <div className="max-w-7xl mx-auto">
-          Firulais &mdash; Optimized for deuteranopia accessibility &mdash; Designed for Local LLM inference
+          Firulais 🐶 &mdash; Optimized for deuteranopia accessibility &mdash; Designed for Local LLM inference
         </div>
       </footer>
     </div>
