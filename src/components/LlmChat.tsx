@@ -86,7 +86,7 @@ const LlmChat: React.FC<LlmChatProps> = ({ parsedContext, llmEndpoint, isConnect
                 key={index} 
                 className={`${
                   message.role === 'user' 
-                    ? 'ml-auto bg-raw_umber-600 text-khaki-500' 
+                    ? 'ml-auto bg-raw_umber-700 text-khaki-900' 
                     : 'mr-auto bg-seal_brown-300 text-foreground'
                 } rounded-lg p-3 max-w-[80%] break-words`}
               >
