@@ -104,7 +104,7 @@ const FileUpload: React.FC<FileUploadProps> = ({ onFileContent }) => {
           </div>
         ) : (
           <div className="flex flex-col items-center gap-3">
-            <div className="bg-primary bg-opacity-20 rounded-full p-3">
+            <div >
               <Upload className="h-6 w-6 text-primary" />
             </div>
             <div className="text-center">
