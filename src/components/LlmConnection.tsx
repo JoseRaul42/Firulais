@@ -130,7 +130,9 @@ const LlmConnection: React.FC<LlmConnectionProps> = ({ onConnectionChange, onEnd
         />
         
         <button 
-          className={`cyber-button-highlight px-4 py-2 ${isLoading ? 'opacity-50' : ''} ${isConnected ? 'bg-sage-500 hover:bg-sage-600' : ''}`}
+          className={`cyber-button-highlight px-4 py-2 ${isLoading ? 'opacity-50' : ''} ${
+            isConnected ? 'bg-ebony-500 hover:bg-ebony-600 text-khaki-500 border border-sage-500' : ''
+          }`}
           onClick={testConnection}
           disabled={isLoading}
         >
