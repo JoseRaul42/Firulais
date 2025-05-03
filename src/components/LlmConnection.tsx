@@ -1,6 +1,5 @@
-
 import React, { useState, useEffect } from 'react';
-import { Plug, PlugOff, RefreshCw } from 'lucide-react';
+import { Plug, RefreshCw } from 'lucide-react';
 import { useToast } from "@/hooks/use-toast";
 
 interface LlmConnectionProps {
@@ -60,7 +59,7 @@ const LlmConnection: React.FC<LlmConnectionProps> = ({ onConnectionChange, onEnd
       <h2 className="text-lg font-semibold cyber-text-glow flex items-center gap-2">
         {isConnected ? 
           <Plug className="h-5 w-5 text-sage-500" /> : 
-          <PlugOff className="h-5 w-5 text-raw_umber-500" />
+          <Plug className="h-5 w-5 text-raw_umber-500" />
         }
         <span>LLM Connection</span>
         {isConnected && <span className="inline-block w-3 h-3 bg-sage-500 rounded-full animate-pulse ml-2"></span>}
