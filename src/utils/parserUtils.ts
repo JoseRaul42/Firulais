@@ -1,4 +1,3 @@
-
 /**
  * Parses raw text using the specified algorithm
  * @param rawText The raw text to parse
@@ -34,7 +33,24 @@ export const parseRawText = (rawText: string): string[] => {
       })
       .filter((line): line is string => line !== null);
     
-    return processedLines;
+    // Group similar lines and count occurrences
+    const lineCountMap = new Map<string, number>();
+    
+    processedLines.forEach(line => {
+      const count = lineCountMap.get(line) || 0;
+      lineCountMap.set(line, count + 1);
+    });
+    
+    // Convert to array and sort by count (descending)
+    const summarizedLines = Array.from(lineCountMap.entries())
+      .map(([line, count]) => `${line} (${count})`)
+      .sort((a, b) => {
+        const countA = parseInt(a.match(/\((\d+)\)$/)?.[1] || "0");
+        const countB = parseInt(b.match(/\((\d+)\)$/)?.[1] || "0");
+        return countB - countA;
+      });
+    
+    return summarizedLines;
   } catch (error) {
     console.error("Error parsing text:", error);
     return [];

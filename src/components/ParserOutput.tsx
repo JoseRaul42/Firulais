@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Copy, FileJson } from 'lucide-react';
 import TokenCounter from './TokenCounter';
@@ -15,6 +14,22 @@ const ParserOutput: React.FC<ParserOutputProps> = ({ parsedData }) => {
   const outputText = showJson 
     ? convertToJson(parsedData) 
     : parsedData.join('\n');
+
+  // Function to extract count from summarized line for display
+  const extractTotalEntries = (): number => {
+    if (parsedData.length === 0) return 0;
+    
+    let totalCount = 0;
+    parsedData.forEach(line => {
+      const match = line.match(/\((\d+)\)$/);
+      if (match && match[1]) {
+        totalCount += parseInt(match[1]);
+      } else {
+        totalCount += 1; // If no count found, assume 1
+      }
+    });
+    return totalCount;
+  };
 
   const handleCopyToClipboard = async () => {
     try {
@@ -63,19 +78,21 @@ const ParserOutput: React.FC<ParserOutputProps> = ({ parsedData }) => {
     }
   };
 
+  const totalEntries = extractTotalEntries();
+
   return (
     <div className="cyber-panel flex flex-col gap-4">
       <div className="flex justify-between items-center">
         <h2 className="text-lg font-semibold cyber-text-glow">
           {parsedData.length > 0 
-            ? `Parsed Output (${parsedData.length} items)` 
+            ? `Summarized Output (${parsedData.length} unique lines, ${totalEntries} total entries)` 
             : "Parsed Output"
           }
         </h2>
         <div className="flex gap-2">
           <button
             onClick={() => setShowJson(!showJson)}
-            className={`cyber-button text-xs ${showJson ? 'border-cyber-amber' : ''}`}
+            className={`cyber-button text-xs ${showJson ? 'border-raw_umber-500' : ''}`}
             title={showJson ? "View plain text" : "View as JSON"}
           >
             <FileJson className="h-4 w-4" />
@@ -100,7 +117,7 @@ const ParserOutput: React.FC<ParserOutputProps> = ({ parsedData }) => {
         </div>
       </div>
 
-      <div className="flex-1 min-h-[200px] max-h-[400px] overflow-auto bg-cyber-darker rounded border border-primary border-opacity-30 p-4">
+      <div className="flex-1 min-h-[200px] max-h-[400px] overflow-auto bg-ebony-100 rounded border border-primary border-opacity-30 p-4">
         {parsedData.length > 0 ? (
           <pre className="text-xs font-mono whitespace-pre-wrap">
             {outputText}
