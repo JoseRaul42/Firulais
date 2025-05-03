@@ -1,7 +1,7 @@
 
 import React, { useState } from 'react';
 import { Text } from 'lucide-react';
-import { TokenCounter } from './TokenCounter';
+import TokenCounter from './TokenCounter';
 
 interface RawTextInputProps {
   onRawTextChange: (text: string) => void;
