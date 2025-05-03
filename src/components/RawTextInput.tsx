@@ -1,14 +1,22 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Text } from 'lucide-react';
 import TokenCounter from './TokenCounter';
 
 interface RawTextInputProps {
   onRawTextChange: (text: string) => void;
+  initialText?: string;
 }
 
-const RawTextInput: React.FC<RawTextInputProps> = ({ onRawTextChange }) => {
-  const [rawText, setRawText] = useState('');
+const RawTextInput: React.FC<RawTextInputProps> = ({ onRawTextChange, initialText = '' }) => {
+  const [rawText, setRawText] = useState(initialText);
+
+  // Update internal state when initialText prop changes
+  useEffect(() => {
+    if (initialText !== rawText) {
+      setRawText(initialText);
+    }
+  }, [initialText]);
 
   const handleTextChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     const newText = e.target.value;

@@ -5,23 +5,46 @@ import { generateResponse } from "@/utils/llmService";
 import { toast } from "sonner";
 import { ScrollArea } from "@/components/ui/scroll-area";
 
-interface LlmChatProps {
-  parsedContext: string[];
-  llmEndpoint: string;
-  isConnected: boolean;
-}
-
 interface Message {
   role: 'user' | 'assistant';
   content: string;
 }
 
-const LlmChat: React.FC<LlmChatProps> = ({ parsedContext, llmEndpoint, isConnected }) => {
-  const [messages, setMessages] = useState<Message[]>([]);
+interface LlmChatProps {
+  parsedContext: string[];
+  llmEndpoint: string;
+  isConnected: boolean;
+  messages?: Message[];
+  onMessagesChange?: (messages: Message[]) => void;
+}
+
+const LlmChat: React.FC<LlmChatProps> = ({ 
+  parsedContext, 
+  llmEndpoint, 
+  isConnected,
+  messages: externalMessages,
+  onMessagesChange
+}) => {
+  const [messages, setMessages] = useState<Message[]>(externalMessages || []);
   const [inputValue, setInputValue] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const { toast: shadcnToast } = useToast();
+
+  // Sync with parent component if controlled
+  useEffect(() => {
+    if (externalMessages && onMessagesChange) {
+      setMessages(externalMessages);
+    }
+  }, [externalMessages]);
+
+  // Update parent component when messages change
+  const updateMessages = (newMessages: Message[]) => {
+    setMessages(newMessages);
+    if (onMessagesChange) {
+      onMessagesChange(newMessages);
+    }
+  };
 
   // Scroll to bottom of messages
   useEffect(() => {
@@ -35,7 +58,8 @@ const LlmChat: React.FC<LlmChatProps> = ({ parsedContext, llmEndpoint, isConnect
     setInputValue('');
     
     // Add user message to chat
-    setMessages(prev => [...prev, { role: 'user', content: userMessage }]);
+    const newMessages = [...messages, { role: 'user', content: userMessage }];
+    updateMessages(newMessages);
     
     // Send message with context
     setIsLoading(true);
@@ -53,14 +77,14 @@ const LlmChat: React.FC<LlmChatProps> = ({ parsedContext, llmEndpoint, isConnect
       }
       
       // Add assistant message to chat
-      setMessages(prev => [...prev, { role: 'assistant', content: response.text }]);
+      updateMessages([...newMessages, { role: 'assistant', content: response.text }]);
     } catch (error: any) {
       console.error("Error communicating with LLM:", error);
       
       toast.error("LLM Communication Error");
       
       // Add error message to chat
-      setMessages(prev => [...prev, { 
+      updateMessages([...newMessages, { 
         role: 'assistant', 
         content: "Error: I couldn't reach the LLM server. Please check your connection and try again." 
       }]);

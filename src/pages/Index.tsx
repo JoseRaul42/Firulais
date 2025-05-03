@@ -9,19 +9,33 @@ import { parseRawText } from '@/utils/parserUtils';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { FileText, Text, MessageSquare } from 'lucide-react';
 
+interface Message {
+  role: 'user' | 'assistant';
+  content: string;
+}
+
 const Index = () => {
   const [parsedData, setParsedData] = useState<string[]>([]);
+  const [rawText, setRawText] = useState<string>('');
+  const [chatMessages, setChatMessages] = useState<Message[]>([]);
   const [llmEndpoint, setLlmEndpoint] = useState<string>(localStorage.getItem('llmEndpoint') || 'http://localhost:11434');
   const [isLlmConnected, setIsLlmConnected] = useState<boolean>(false);
+  const [activeTab, setActiveTab] = useState<string>('input');
 
   const handleRawTextChange = (text: string) => {
+    setRawText(text);
     const processed = parseRawText(text);
     setParsedData(processed);
   };
 
   const handleFileContent = (content: string) => {
+    setRawText(content);
     const processed = parseRawText(content);
     setParsedData(processed);
+  };
+
+  const handleChatMessagesChange = (messages: Message[]) => {
+    setChatMessages(messages);
   };
 
   return (
@@ -48,7 +62,11 @@ const Index = () => {
             />
           </div>
 
-          <Tabs defaultValue="input" className="w-full">
+          <Tabs 
+            value={activeTab} 
+            onValueChange={setActiveTab} 
+            className="w-full"
+          >
             <TabsList className="grid grid-cols-3 mb-2 h-8">
               <TabsTrigger value="input" className="flex gap-1 items-center text-xs">
                 <Text className="h-3 w-3" />
@@ -65,7 +83,7 @@ const Index = () => {
             </TabsList>
             
             <TabsContent value="input" className="mt-0">
-              <RawTextInput onRawTextChange={handleRawTextChange} />
+              <RawTextInput onRawTextChange={handleRawTextChange} initialText={rawText} />
             </TabsContent>
             
             <TabsContent value="output" className="mt-0">
@@ -77,6 +95,8 @@ const Index = () => {
                 parsedContext={parsedData} 
                 llmEndpoint={llmEndpoint}
                 isConnected={isLlmConnected}
+                messages={chatMessages}
+                onMessagesChange={handleChatMessagesChange}
               />
             </TabsContent>
           </Tabs>
