@@ -56,6 +56,14 @@
   }
 }
 
+/* Custom text sizes */
+@layer utilities {
+  .text-xxs {
+    font-size: 0.65rem;
+    line-height: 0.9rem;
+  }
+}
+
 /* Custom scrollbar for cyberpunk theme */
 ::-webkit-scrollbar {
   width: 8px;
@@ -77,20 +85,20 @@
 /* Custom components for cyberpunk theme */
 @layer components {
   .cyber-panel {
-    @apply bg-seal_brown-200 border border-seal_brown-400 border-opacity-50 rounded-md p-4 relative overflow-hidden;
+    @apply bg-seal_brown-200 border border-seal_brown-400 border-opacity-50 rounded-md p-3 relative overflow-hidden;
     box-shadow: 0 0 10px rgba(88, 47, 14, 0.25);
   }
   
   .cyber-input {
-    @apply bg-seal_brown-100 border border-seal_brown-400 rounded-md p-2 focus:outline-none focus:ring-1 focus:ring-seal_brown-600;
+    @apply bg-seal_brown-100 border border-seal_brown-400 rounded-md p-1.5 focus:outline-none focus:ring-1 focus:ring-seal_brown-600;
   }
   
   .cyber-button {
-    @apply px-4 py-2 border border-seal_brown-500 bg-seal_brown-200 hover:bg-opacity-80 active:bg-opacity-100 text-foreground rounded transition duration-200 flex items-center gap-2;
+    @apply px-3 py-1.5 border border-seal_brown-500 bg-seal_brown-200 hover:bg-opacity-80 active:bg-opacity-100 text-foreground rounded transition duration-200 flex items-center gap-2;
   }
   
   .cyber-button-highlight {
-    @apply px-4 py-2 bg-raw_umber-500 hover:bg-opacity-80 active:bg-opacity-100 text-khaki-500 rounded transition duration-200 flex items-center gap-2;
+    @apply px-3 py-1.5 bg-raw_umber-500 hover:bg-opacity-80 active:bg-opacity-100 text-khaki-500 rounded transition duration-200 flex items-center gap-2;
   }
 
   .cyber-border {

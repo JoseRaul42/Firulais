@@ -1,8 +1,10 @@
+
 import React, { useState } from 'react';
 import { Copy, FileJson } from 'lucide-react';
 import TokenCounter from './TokenCounter';
 import { convertToJson } from '@/utils/parserUtils';
 import { useToast } from "@/hooks/use-toast";
+import { ScrollArea } from "@/components/ui/scroll-area";
 
 interface ParserOutputProps {
   parsedData: string[];
@@ -81,53 +83,53 @@ const ParserOutput: React.FC<ParserOutputProps> = ({ parsedData }) => {
   const totalEntries = extractTotalEntries();
 
   return (
-    <div className="cyber-panel flex flex-col gap-4">
-      <div className="flex justify-between items-center">
-        <h2 className="text-lg font-semibold cyber-text-glow">
+    <div className="cyber-panel flex flex-col gap-2">
+      <div className="flex justify-between items-center mb-1">
+        <h2 className="text-sm font-medium cyber-text-glow">
           {parsedData.length > 0 
-            ? `Summarized Output (${parsedData.length} unique lines, ${totalEntries} total entries)` 
+            ? `Summarized Output (${parsedData.length} lines, ${totalEntries} entries)` 
             : "Parsed Output"
           }
         </h2>
         <div className="flex gap-2">
           <button
             onClick={() => setShowJson(!showJson)}
-            className={`cyber-button text-xs ${showJson ? 'border-raw_umber-500' : ''}`}
+            className={`cyber-button text-xs py-1 px-2 ${showJson ? 'border-raw_umber-500' : ''}`}
             title={showJson ? "View plain text" : "View as JSON"}
           >
-            <FileJson className="h-4 w-4" />
+            <FileJson className="h-3 w-3" />
             {showJson ? "Text" : "JSON"}
           </button>
           <button 
             onClick={handleCopyToClipboard}
-            className="cyber-button text-xs"
+            className="cyber-button text-xs py-1 px-2"
             title="Copy to clipboard"
           >
-            <Copy className="h-4 w-4" />
+            <Copy className="h-3 w-3" />
             Copy
           </button>
           <button 
             onClick={handleExportJson}
-            className="cyber-button-highlight text-xs"
+            className="cyber-button-highlight text-xs py-1 px-2"
             title="Export as JSON file"
           >
-            <FileJson className="h-4 w-4" />
+            <FileJson className="h-3 w-3" />
             Export
           </button>
         </div>
       </div>
 
-      <div className="flex-1 min-h-[200px] max-h-[400px] overflow-auto bg-ebony-100 rounded border border-primary border-opacity-30 p-4">
+      <ScrollArea className="flex-1 h-[400px] border border-primary border-opacity-30 rounded p-2 bg-ebony-100">
         {parsedData.length > 0 ? (
-          <pre className="text-xs font-mono whitespace-pre-wrap">
+          <pre className="text-xxs font-mono whitespace-pre-wrap pr-2">
             {outputText}
           </pre>
         ) : (
-          <div className="h-full flex items-center justify-center text-muted-foreground text-sm italic">
+          <div className="h-full flex items-center justify-center text-muted-foreground text-xs italic">
             No parsed data to display
           </div>
         )}
-      </div>
+      </ScrollArea>
 
       <TokenCounter text={outputText} />
     </div>

@@ -7,7 +7,7 @@ import LlmConnection from '@/components/LlmConnection';
 import LlmChat from '@/components/LlmChat';
 import { parseRawText } from '@/utils/parserUtils';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { FileText, Text, Eye, MessageSquare } from 'lucide-react';
+import { FileText, Text, MessageSquare } from 'lucide-react';
 
 const Index = () => {
   const [parsedData, setParsedData] = useState<string[]>([]);
@@ -26,20 +26,20 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-cyber-darker text-foreground flex flex-col">
-      <header className="py-6 px-4 md:px-8 border-b border-primary border-opacity-30">
+      <header className="py-3 px-3 md:px-5 border-b border-primary border-opacity-30">
         <div className="max-w-7xl mx-auto">
-          <h1 className="text-2xl md:text-3xl font-bold tracking-tight cyber-text-glow">
+          <h1 className="text-xl font-bold tracking-tight cyber-text-glow">
             Firulais
           </h1>
-          <p className="text-muted-foreground mt-1">
+          <p className="text-xs text-muted-foreground mt-0.5">
             Parse, condense, and optimize .pcap files for LLM processing
           </p>
         </div>
       </header>
 
-      <main className="flex-1 py-6 px-4 md:px-8">
-        <div className="max-w-7xl mx-auto grid gap-8">
-          <div className="grid md:grid-cols-2 gap-6">
+      <main className="flex-1 py-3 px-3 md:px-5 overflow-y-auto">
+        <div className="max-w-7xl mx-auto grid gap-4">
+          <div className="grid md:grid-cols-2 gap-3">
             <FileUpload onFileContent={handleFileContent} />
             
             <LlmConnection 
@@ -49,18 +49,18 @@ const Index = () => {
           </div>
 
           <Tabs defaultValue="input" className="w-full">
-            <TabsList className="grid grid-cols-3 mb-4">
-              <TabsTrigger value="input" className="flex gap-2 items-center">
-                <Text className="h-4 w-4" />
-                Input Raw Data
+            <TabsList className="grid grid-cols-3 mb-2 h-8">
+              <TabsTrigger value="input" className="flex gap-1 items-center text-xs">
+                <Text className="h-3 w-3" />
+                Input
               </TabsTrigger>
-              <TabsTrigger value="output" className="flex gap-2 items-center">
-                <FileText className="h-4 w-4" />
-                Processed Output
+              <TabsTrigger value="output" className="flex gap-1 items-center text-xs">
+                <FileText className="h-3 w-3" />
+                Output
               </TabsTrigger>
-              <TabsTrigger value="chat" className="flex gap-2 items-center">
-                <MessageSquare className="h-4 w-4" />
-                LLM Chat
+              <TabsTrigger value="chat" className="flex gap-1 items-center text-xs">
+                <MessageSquare className="h-3 w-3" />
+                Chat
               </TabsTrigger>
             </TabsList>
             
@@ -83,7 +83,7 @@ const Index = () => {
         </div>
       </main>
 
-      <footer className="py-4 px-4 md:px-8 border-t border-primary border-opacity-30 text-center text-xs text-muted-foreground">
+      <footer className="py-2 px-3 md:px-5 border-t border-primary border-opacity-30 text-center text-xxs text-muted-foreground">
         <div className="max-w-7xl mx-auto">
           Firulais &mdash; Optimized for deuteranopia accessibility &mdash; Designed for Local LLM inference
         </div>

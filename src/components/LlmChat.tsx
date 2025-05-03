@@ -3,6 +3,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import { useToast } from "@/hooks/use-toast";
 import { generateResponse } from "@/utils/llmService";
 import { toast } from "sonner";
+import { ScrollArea } from "@/components/ui/scroll-area";
 
 interface LlmChatProps {
   parsedContext: string[];
@@ -69,47 +70,47 @@ const LlmChat: React.FC<LlmChatProps> = ({ parsedContext, llmEndpoint, isConnect
   };
 
   return (
-    <div className="cyber-panel flex flex-col gap-4">
-      <h2 className="text-lg font-semibold cyber-text-glow">
+    <div className="cyber-panel flex flex-col gap-2">
+      <h2 className="text-sm font-medium cyber-text-glow mb-1">
         Tactical LLM Interface
       </h2>
       
-      <div className="flex-1 min-h-[300px] max-h-[500px] overflow-y-auto bg-ebony-100 rounded border border-seal_brown-400 border-opacity-50 p-4">
+      <ScrollArea className="flex-1 h-[400px] rounded border border-seal_brown-400 border-opacity-50 p-2 bg-ebony-100">
         {messages.length === 0 ? (
-          <div className="h-full flex items-center justify-center text-muted-foreground text-sm italic">
+          <div className="h-full flex items-center justify-center text-muted-foreground text-xs italic">
             Messages will appear here. All queries will include parsed context.
           </div>
         ) : (
-          <div className="space-y-4">
+          <div className="space-y-3 pr-2">
             {messages.map((message, index) => (
               <div 
                 key={index} 
                 className={`${
                   message.role === 'user' 
-                    ? 'ml-auto bg-muted-foreground text-khaki-900' 
+                    ? 'ml-auto bg-raw_umber-700 text-khaki-100' 
                     : 'mr-auto bg-seal_brown-300 text-foreground'
-                } rounded-lg p-3 max-w-[80%] break-words`}
+                } rounded-lg p-2 max-w-[85%] break-words`}
               >
-                <p className="text-xs font-small mb-1 opacity-70">
+                <p className="text-xxs font-medium mb-0.5 opacity-70">
                   {message.role === 'user' ? 'You' : 'LLM Assistant'}
                 </p>
-                <p className="whitespace-pre-wrap">{message.content}</p>
+                <p className="whitespace-pre-wrap text-xs">{message.content}</p>
               </div>
             ))}
             <div ref={messagesEndRef} />
           </div>
         )}
         {isLoading && (
-          <div className="flex justify-center my-4">
-            <div className="cyber-text-glow animate-pulse">Processing...</div>
+          <div className="flex justify-center my-2">
+            <div className="cyber-text-glow animate-pulse text-xs">Processing...</div>
           </div>
         )}
-      </div>
+      </ScrollArea>
       
-      <div className="flex gap-2">
+      <div className="flex gap-2 mt-1">
         <input
           type="text"
-          className="cyber-input flex-grow"
+          className="cyber-input flex-grow text-xs py-1.5"
           placeholder={isConnected ? "Enter your message..." : "Connect to LLM to start chatting"}
           value={inputValue}
           onChange={(e) => setInputValue(e.target.value)}
@@ -118,7 +119,7 @@ const LlmChat: React.FC<LlmChatProps> = ({ parsedContext, llmEndpoint, isConnect
         />
         
         <button 
-          className={`cyber-button-highlight px-4 py-2 ${(!isConnected || !inputValue.trim() || isLoading) ? 'opacity-50 cursor-not-allowed' : ''}`}
+          className={`cyber-button-highlight px-3 py-1.5 text-xs ${(!isConnected || !inputValue.trim() || isLoading) ? 'opacity-50 cursor-not-allowed' : ''}`}
           onClick={handleSendMessage}
           disabled={!isConnected || !inputValue.trim() || isLoading}
         >
@@ -126,7 +127,7 @@ const LlmChat: React.FC<LlmChatProps> = ({ parsedContext, llmEndpoint, isConnect
         </button>
       </div>
       
-      <div className="text-xs text-russet-700">
+      <div className="text-xxs text-russet-700">
         <p>All messages include the parsed context for intelligent responses.</p>
       </div>
     </div>
