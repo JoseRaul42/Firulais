@@ -55,7 +55,7 @@ export default {
         },
         // Earth-toned cyberpunk theme colors (deuteranopia-friendly)
         cyber: {
-          dark: "#120903", // seal_brown-100
+          dark: "#c2c5aa", // seal_brown-100
           darker: "#0D0E0A", // ebony-100
           blue: "#A4AC86", // sage
           teal: "#656D4A", // reseda_green
