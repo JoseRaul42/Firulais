@@ -1,6 +1,8 @@
 
 import React, { useState, useRef, useEffect } from 'react';
 import { useToast } from "@/hooks/use-toast";
+import { generateResponse } from "@/utils/llmService";
+import { toast } from "sonner";
 
 interface LlmChatProps {
   parsedContext: string[];
@@ -18,7 +20,7 @@ const LlmChat: React.FC<LlmChatProps> = ({ parsedContext, llmEndpoint, isConnect
   const [inputValue, setInputValue] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
-  const { toast } = useToast();
+  const { toast: shadcnToast } = useToast();
 
   // Scroll to bottom of messages
   useEffect(() => {
@@ -34,38 +36,27 @@ const LlmChat: React.FC<LlmChatProps> = ({ parsedContext, llmEndpoint, isConnect
     // Add user message to chat
     setMessages(prev => [...prev, { role: 'user', content: userMessage }]);
     
-    // Prepare the context + message
+    // Send message with context
     setIsLoading(true);
-    const contextString = parsedContext.join('\n');
     
     try {
-      const response = await fetch(`${llmEndpoint}/api/generate`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          prompt: `${contextString}\n\nUser: ${userMessage}`
-        }),
-      });
+      const llmConfig = {
+        provider: 'local' as const,
+        localEndpoint: llmEndpoint
+      };
       
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
+      const response = await generateResponse(userMessage, parsedContext, llmConfig);
+      
+      if (!response) {
+        throw new Error("Failed to get a response");
       }
       
-      const data = await response.json();
-      const llmResponse = data.response || "Sorry, I couldn't generate a response.";
-      
       // Add assistant message to chat
-      setMessages(prev => [...prev, { role: 'assistant', content: llmResponse }]);
-    } catch (error) {
+      setMessages(prev => [...prev, { role: 'assistant', content: response.text }]);
+    } catch (error: any) {
       console.error("Error communicating with LLM:", error);
       
-      toast({
-        title: "LLM Communication Error",
-        description: "Failed to get a response from the LLM. Please check your connection.",
-        variant: "destructive",
-      });
+      toast.error("LLM Communication Error");
       
       // Add error message to chat
       setMessages(prev => [...prev, { 

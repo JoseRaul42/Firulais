@@ -1,6 +1,9 @@
+
 import React, { useState, useEffect } from 'react';
 import { Plug, RefreshCw } from 'lucide-react';
 import { useToast } from "@/hooks/use-toast";
+import { defaultLLMConfig, LLMConfig } from "@/utils/llmService";
+import { toast } from "sonner";
 
 interface LlmConnectionProps {
   onConnectionChange: (connected: boolean) => void;
@@ -8,10 +11,12 @@ interface LlmConnectionProps {
 }
 
 const LlmConnection: React.FC<LlmConnectionProps> = ({ onConnectionChange, onEndpointChange }) => {
-  const [endpoint, setEndpoint] = useState<string>(localStorage.getItem('llmEndpoint') || 'http://localhost:11434');
+  const [endpoint, setEndpoint] = useState<string>(
+    localStorage.getItem('llmEndpoint') || defaultLLMConfig.localEndpoint || 'http://localhost:11434'
+  );
   const [isConnected, setIsConnected] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const { toast } = useToast();
+  const { toast: shadcnToast } = useToast();
 
   // Save endpoint to localStorage when it changes
   useEffect(() => {
@@ -23,32 +28,68 @@ const LlmConnection: React.FC<LlmConnectionProps> = ({ onConnectionChange, onEnd
     setIsLoading(true);
     
     try {
-      // Simple connection test - just a HEAD request
-      const response = await fetch(endpoint, {
-        method: 'HEAD',
-      });
+      // First try a HEAD request to check if the server is responding
+      try {
+        const headResponse = await fetch(endpoint, {
+          method: 'HEAD',
+        });
+        
+        if (headResponse.ok) {
+          setIsConnected(true);
+          onConnectionChange(true);
+          toast.success("Connection successful");
+          setIsLoading(false);
+          return;
+        }
+      } catch (error) {
+        console.log("HEAD request failed, trying OPTIONS...");
+      }
+
+      // If HEAD fails, try a simple OPTIONS request
+      try {
+        const optionsResponse = await fetch(endpoint, {
+          method: 'OPTIONS',
+        });
+        
+        if (optionsResponse.ok) {
+          setIsConnected(true);
+          onConnectionChange(true);
+          toast.success("Connection successful");
+          setIsLoading(false);
+          return;
+        }
+      } catch (error) {
+        console.log("OPTIONS request failed, trying a minimal POST...");
+      }
       
-      const newConnectionStatus = response.ok;
+      // Last resort: try a minimal POST request that should be accepted by most LLM APIs
+      const response = await fetch(endpoint, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          messages: [{ role: 'user', content: 'hello' }],
+          max_tokens: 1
+        }),
+      });
+
+      // Check if we got any response back, even an error
+      const newConnectionStatus = response.status !== 0;
       setIsConnected(newConnectionStatus);
       onConnectionChange(newConnectionStatus);
       
-      toast({
-        title: newConnectionStatus ? "Connection successful" : "Connection failed",
-        description: newConnectionStatus 
-          ? "Successfully connected to LLM endpoint" 
-          : "Could not connect to the specified endpoint",
-        variant: newConnectionStatus ? "default" : "destructive",
-      });
+      if (newConnectionStatus) {
+        toast.success("Connection successful");
+      } else {
+        toast.error("Connection failed");
+      }
     } catch (error) {
       console.error("Connection error:", error);
       setIsConnected(false);
       onConnectionChange(false);
       
-      toast({
-        title: "Connection failed",
-        description: "Could not connect to the specified endpoint",
-        variant: "destructive",
-      });
+      toast.error("Connection failed");
     } finally {
       setIsLoading(false);
     }
@@ -70,7 +111,7 @@ const LlmConnection: React.FC<LlmConnectionProps> = ({ onConnectionChange, onEnd
         <input
           type="text"
           className="cyber-input flex-grow"
-          placeholder="http://localhost:11434"
+          placeholder={defaultLLMConfig.localEndpoint}
           value={endpoint}
           onChange={(e) => setEndpoint(e.target.value)}
         />
@@ -86,7 +127,7 @@ const LlmConnection: React.FC<LlmConnectionProps> = ({ onConnectionChange, onEnd
       </div>
       
       <div className="text-xs text-russet-700">
-        <p>Enter the endpoint for your local llama.cpp API (e.g., http://localhost:11434)</p>
+        <p>Enter the endpoint for your local LLM API (e.g., http://localhost:1234/v1/chat/completions)</p>
       </div>
     </div>
   );
