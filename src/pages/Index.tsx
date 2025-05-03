@@ -105,7 +105,7 @@ const Index = () => {
 
       <footer className="py-2 px-3 md:px-5 border-t border-primary border-opacity-30 text-center text-xxs text-muted-foreground">
         <div className="max-w-7xl mx-auto">
-          Firulais 🐶 &mdash; Optimized for deuteranopia accessibility &mdash; Designed for Local LLM inference
+          Firulais 🐶  &mdash; Designed for Local LLM inference
         </div>
       </footer>
     </div>

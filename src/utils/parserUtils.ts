@@ -1,57 +1,60 @@
-
 /**
  * Parses raw text using the specified algorithm
  * @param rawText The raw text to parse
- * @returns Array of parsed lines
+ * @returns Array of parsed lines including alert summaries and IP counts
  */
 export const parseRawText = (rawText: string): string[] => {
   if (!rawText) return [];
 
   try {
     const lines = rawText.split('\n').filter(line => line.trim() !== '');
-    
-    // Apply the specified parsing logic
-    const processedLines = lines
-      .filter(line => line.includes(']') && line.includes('[') && line.includes('"'))
-      .map(line => {
-        try {
-          const parts = line.split(']');
-          if (parts.length < 3) return null;
-          
-          const part = parts[2];
-          const subParts = part.split('[');
-          if (subParts.length < 1) return null;
-          
-          const subPart = subParts[0];
+
+    const processedLines: string[] = [];
+    const alertMap = new Map<string, number>();
+    const ipMap = new Map<string, number>();
+    const ipRegex = /\b\d{1,3}(?:\.\d{1,3}){3}\b/;
+
+    lines.forEach(line => {
+      // Extract alert name
+      if (line.includes(']') && line.includes('[') && line.includes('"')) {
+        const parts = line.split(']');
+        if (parts.length >= 3) {
+          const subPart = parts[2].split('[')[0];
           const quoteParts = subPart.split('"');
-          if (quoteParts.length < 2) return null;
-          
-          return quoteParts[1];
-        } catch (e) {
-          console.error("Error parsing line:", line, e);
-          return null;
+          if (quoteParts.length >= 2) {
+            const alertName = quoteParts[1];
+            alertMap.set(alertName, (alertMap.get(alertName) || 0) + 1);
+          }
         }
-      })
-      .filter((line): line is string => line !== null);
-    
-    // Group similar lines and count occurrences
-    const lineCountMap = new Map<string, number>();
-    
-    processedLines.forEach(line => {
-      const count = lineCountMap.get(line) || 0;
-      lineCountMap.set(line, count + 1);
+      }
+
+      // Extract IP
+      const ipMatch = line.match(ipRegex);
+      if (ipMatch) {
+        const ip = ipMatch[0];
+        ipMap.set(ip, (ipMap.get(ip) || 0) + 1);
+      }
     });
-    
-    // Convert to array and sort by count (descending)
-    const summarizedLines = Array.from(lineCountMap.entries())
-      .map(([line, count]) => `${line} (${count})`)
+
+    // Create alert summary
+    const alertSummary = Array.from(alertMap.entries())
+      .map(([alert, count]) => `${alert} (${count})`)
       .sort((a, b) => {
-        const countA = parseInt(a.match(/\((\d+)\)$/)?.[1] || "0");
-        const countB = parseInt(b.match(/\((\d+)\)$/)?.[1] || "0");
+        const countA = parseInt(a.match(/\((\d+)\)/)?.[1] || "0");
+        const countB = parseInt(b.match(/\((\d+)\)/)?.[1] || "0");
         return countB - countA;
       });
-    
-    return summarizedLines;
+
+    // Create IP summary
+    const ipSummary = Array.from(ipMap.entries())
+      .map(([ip, count]) => `IP ${ip} (${count})`)
+      .sort((a, b) => {
+        const countA = parseInt(a.match(/\((\d+)\)/)?.[1] || "0");
+        const countB = parseInt(b.match(/\((\d+)\)/)?.[1] || "0");
+        return countB - countA;
+      });
+
+    return [...alertSummary, ...ipSummary];
   } catch (error) {
     console.error("Error parsing text:", error);
     return [];
@@ -64,13 +67,12 @@ export const parseRawText = (rawText: string): string[] => {
  * @returns Approximate token count
  */
 export const estimateTokenCount = (text: string): number => {
-  // Simple approximation: 4 chars ≈ 1 token for English text
   if (!text) return 0;
   return Math.ceil(text.length / 4);
 };
 
 /**
- * Converts parsed data to JSON format
+ * Converts parsed data to JSON format (alerts and IPs combined)
  * @param parsedData Array of parsed lines
  * @returns JSON string representation
  */
