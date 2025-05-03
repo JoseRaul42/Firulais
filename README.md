@@ -1,6 +1,6 @@
 # Firulais
 
-**Firulais** is a privacy-first web application designed to **parse, condense, and optimize IDS alert logs** (like those from **Snort**) for human-readable reporting. It supports **local LLM (Large Language Model)** processing for total offline privacy, ensuring your sensitive logs never leave your machine.
+**Firulais** is a privacy-first web application designed to **parse, condense, and optimize IDS alert logs** (like those from **Snort**) for human-readable reporting. It supports **local LLM (Large Language Model)** processing for total offline privacy.
 
 ---
 
@@ -49,17 +49,6 @@ Whether you're trying to understand your network's behavior or compress verbose 
    - Open Developer Tools (F12)
    - Go to the "Application" tab → "Local Storage"
    - Right-click your app's URL and choose "Clear"
-
-### Vercel Demo (Not Private)
-
-A public demo is available at:
-
-```
-https://your-vercel-url.vercel.app
-```
-
-> For privacy reasons, use the local version to analyze real alert logs.
-
 ---
 
 ## Folder Structure
@@ -68,7 +57,7 @@ https://your-vercel-url.vercel.app
 firulais/
 ├── node_modules/              # Project dependencies
 ├── public/                    # Static assets
-├── src/Utils/ExampleData      # Source code and example IDS logs
+├── src/Utils/ExampleData      # Source code and example IDS alert logs
 ├── .gitignore
 ├── bun.lockb
 ├── components.json
