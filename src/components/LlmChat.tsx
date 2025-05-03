@@ -86,11 +86,11 @@ const LlmChat: React.FC<LlmChatProps> = ({ parsedContext, llmEndpoint, isConnect
                 key={index} 
                 className={`${
                   message.role === 'user' 
-                    ? 'ml-auto bg-raw_umber-700 text-khaki-900' 
+                    ? 'ml-auto bg-muted-foreground text-khaki-900' 
                     : 'mr-auto bg-seal_brown-300 text-foreground'
                 } rounded-lg p-3 max-w-[80%] break-words`}
               >
-                <p className="text-xs font-medium mb-1 opacity-70">
+                <p className="text-xs font-small mb-1 opacity-70">
                   {message.role === 'user' ? 'You' : 'LLM Assistant'}
                 </p>
                 <p className="whitespace-pre-wrap">{message.content}</p>

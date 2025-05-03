@@ -29,7 +29,7 @@ const Index = () => {
       <header className="py-6 px-4 md:px-8 border-b border-primary border-opacity-30">
         <div className="max-w-7xl mx-auto">
           <h1 className="text-2xl md:text-3xl font-bold tracking-tight cyber-text-glow">
-            Cyber Whisper Parser
+            Firulais
           </h1>
           <p className="text-muted-foreground mt-1">
             Parse, condense, and optimize .pcap files for LLM processing
@@ -85,7 +85,7 @@ const Index = () => {
 
       <footer className="py-4 px-4 md:px-8 border-t border-primary border-opacity-30 text-center text-xs text-muted-foreground">
         <div className="max-w-7xl mx-auto">
-          Cyber Whisper Parser &mdash; Optimized for deuteranopia accessibility &mdash; Designed for LLM inference
+          Firulais &mdash; Optimized for deuteranopia accessibility &mdash; Designed for Local LLM inference
         </div>
       </footer>
     </div>
