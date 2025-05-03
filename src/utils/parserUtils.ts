@@ -47,7 +47,7 @@ export const parseRawText = (rawText: string): string[] => {
 
     // Create IP summary
     const ipSummary = Array.from(ipMap.entries())
-      .map(([ip, count]) => `IP ${ip} (${count})`)
+      .map(([ip, count]) => `${ip} (${count})`)
       .sort((a, b) => {
         const countA = parseInt(a.match(/\((\d+)\)/)?.[1] || "0");
         const countB = parseInt(b.match(/\((\d+)\)/)?.[1] || "0");

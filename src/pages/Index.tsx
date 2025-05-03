@@ -46,7 +46,7 @@ const Index = () => {
             Firulais 🐶
           </h1>
           <p className="text-xs text-muted-foreground mt-0.5">
-            Parse, condense, and optimize .pcap files for LLM processing
+            Parse, condense, and optimize IDS alert logs for reporting with Local LLM processing for total privacy 
           </p>
         </div>
       </header>
