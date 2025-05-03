@@ -1,73 +1,101 @@
-# Welcome to your Lovable project
+# 🐾 Firulais
 
-## Project info
+**Firulais** is a privacy-first web application designed to **parse, condense, and optimize IDS alert logs** (like those from **Snort**) for **readable reporting**. This app supports **local LLM (Large Language Model)** processing for **complete offline privacy** — ensuring your sensitive logs never leave your machine.
 
-**URL**: https://lovable.dev/projects/68e83877-b8b2-4250-af84-959330101f9a
+---
 
-## How can I edit this code?
+## 🚀 Project Goal
 
-There are several ways of editing your application.
+Firulais was built with one mission:  
+**Make intrusion detection alerts easy to digest without compromising your privacy.**
 
-**Use Lovable**
+Whether you're trying to understand your network's behavior or compress verbose logs into actionable summaries, Firulais gives you the power of local LLM processing through a modern web interface.
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/68e83877-b8b2-4250-af84-959330101f9a) and start prompting.
+---
 
-Changes made via Lovable will be committed automatically to this repo.
+## 🛠 Tech Stack
 
-**Use your preferred IDE**
+- ⚛️ React (with TypeScript)
+- 🧠 Node.js + Vite
+- 🔐 LocalStorage for temporary log caching (you can clear it anytime)
+- 🌐 Hosted with Vercel (demo only – see below)
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+---
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+## 📦 Features
 
-Follow these steps:
+- 🧾 Parses Snort alert logs
+- 🧠 Summarizes content using local LLMs (no remote API calls)
+- 📊 Groups and visualizes alerts for fast triage
+- 🧪 Includes example data to try out instantly
+- 🧼 Privacy-focused: no backend, no tracking, no upload
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+---
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+## 🧪 Demo Mode
 
-# Step 3: Install the necessary dependencies.
-npm i
+You can try out Firulais on the [**Vercel-hosted version**](https://your-vercel-url.vercel.app) using the **example logs** found in the `ExampleData/` folder of this repo.
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
+> 🧪 This version is for demonstration only — it is **not private** since it's hosted remotely.
+
+---
+
+## 🔐 Privacy Mode (Local)
+
+To ensure full data privacy:
+
+1. **Clone this repo** and run it locally:
+   ```bash
+   git clone https://github.com/your-username/firulais.git
+   cd firulais
+   npm install
+   npm run dev
+   ```
+
+2. **Access the local web app** in your browser (usually at `http://localhost:5173`).
+3. **Upload your own Snort alert log file**.
+4. **Manually clear local storage** once done:
+   - Open Dev Tools in your browser (F12)
+   - Go to the **Application** tab
+   - Under **Storage > Local Storage**, right-click your app's domain and choose **Clear**
+
+---
+
+## 📂 Folder Structure
+
+```
+firulais/
+├── ExampleData/         # Example Snort alert logs to test with
+├── src/                 # React source code
+│   ├── components/      # UI components
+│   └── utils/           # Log parsing & summarization logic
+├── public/              # Static assets
+├── vite.config.ts       # Vite configuration
+└── README.md
 ```
 
-**Edit a file directly in GitHub**
+---
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+## 🧠 Summary
 
-**Use GitHub Codespaces**
+Firulais gives security analysts a tool to **read and interpret IDS logs** easily, without giving up privacy.  
+Run it locally, clear your data when done, and trust that your network logs never leave your system.
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+---
 
-## What technologies are used for this project?
+## 🐶 Why "Firulais"?
 
-This project is built with:
+Because even the most loyal dog knows how to guard the house — and your data.
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+---
 
-## How can I deploy this project?
+## 🤝 Contributions
 
-Simply open [Lovable](https://lovable.dev/projects/68e83877-b8b2-4250-af84-959330101f9a) and click on Share -> Publish.
+Feel free to open issues, suggest improvements, or submit PRs. Privacy-forward tooling is a team effort!
 
-## Can I connect a custom domain to my Lovable project?
+---
 
-Yes, you can!
+## 📜 License
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
+MIT © 2025
 
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
