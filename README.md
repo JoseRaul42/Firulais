@@ -1,50 +1,34 @@
-# 🐾 Firulais
+# Firulais
 
-**Firulais** is a privacy-first web application designed to **parse, condense, and optimize IDS alert logs** (like those from **Snort**) for **readable reporting**. This app supports **local LLM (Large Language Model)** processing for **complete offline privacy** — ensuring your sensitive logs never leave your machine.
-
----
-
-## 🚀 Project Goal
-
-Firulais was built with one mission:  
-**Make intrusion detection alerts easy to digest without compromising your privacy.**
-
-Whether you're trying to understand your network's behavior or compress verbose logs into actionable summaries, Firulais gives you the power of local LLM processing through a modern web interface.
+**Firulais** is a privacy-first web application designed to **parse, condense, and optimize IDS alert logs** (like those from **Snort**) for human-readable reporting. It supports **local LLM (Large Language Model)** processing for total offline privacy, ensuring your sensitive logs never leave your machine.
 
 ---
 
-## 🛠 Tech Stack
+## Project Goal
 
-- ⚛️ React (with TypeScript)
-- 🧠 Node.js + Vite
-- 🔐 LocalStorage for temporary log caching (you can clear it anytime)
-- 🌐 Hosted with Vercel (demo only – see below)
+Firulais was built with one clear mission in mind:  
+**Generate insightful reports from your IDS alerts using local LLMs, all while ensuring your data stays private and never leaves your machine.**
 
----
 
-## 📦 Features
-
-- 🧾 Parses Snort alert logs
-- 🧠 Summarizes content using local LLMs (no remote API calls)
-- 📊 Groups and visualizes alerts for fast triage
-- 🧪 Includes example data to try out instantly
-- 🧼 Privacy-focused: no backend, no tracking, no upload
+Whether you're trying to understand your network's behavior or compress verbose logs into summaries, Firulais gives you the power of local LLM processing through a modern web interface.
 
 ---
 
-## 🧪 Demo Mode
+## Tech Stack
 
-You can try out Firulais on the [**Vercel-hosted version**](https://your-vercel-url.vercel.app) using the **example logs** found in the `ExampleData/` folder of this repo.
-
-> 🧪 This version is for demonstration only — it is **not private** since it's hosted remotely.
+- React + TypeScript
+- Llama.cpp for local LLM inference
+- Node.js + Vite
+- LocalStorage for temporary session data
+- Optional Vercel deployment for public demo use
 
 ---
 
-## 🔐 Privacy Mode (Local)
+## Quickstart
 
-To ensure full data privacy:
+### Run Locally (for Full Privacy)
 
-1. **Clone this repo** and run it locally:
+1. **Clone the project and install dependencies**
    ```bash
    git clone https://github.com/your-username/firulais.git
    cd firulais
@@ -52,22 +36,39 @@ To ensure full data privacy:
    npm run dev
    ```
 
-2. **Access the local web app** in your browser (usually at `http://localhost:5173`).
-3. **Upload your own Snort alert log file**.
-4. **Manually clear local storage** once done:
-   - Open Dev Tools in your browser (F12)
-   - Go to the **Application** tab
-   - Under **Storage > Local Storage**, right-click your app's domain and choose **Clear**
+2. **Open the app**  
+   Visit `http://localhost:5173` in your browser.
+
+3. **Load data**
+   - You can use your own Snort alert log file.
+   - Or test with example data:
+     - Go to the `src/Utils/ExampleData` folder.
+     - Copy the content of an example file and paste it into the app interface.
+
+4. **Clear data when done**
+   - Open Developer Tools (F12)
+   - Go to the "Application" tab → "Local Storage"
+   - Right-click your app's URL and choose "Clear"
+
+### Vercel Demo (Not Private)
+
+A public demo is available at:
+
+```
+https://your-vercel-url.vercel.app
+```
+
+> For privacy reasons, use the local version to analyze real alert logs.
 
 ---
 
-## 📂 Folder Structure
+## Folder Structure
 
 ```
 firulais/
 ├── node_modules/              # Project dependencies
 ├── public/                    # Static assets
-├── src/Utils/ExampleData      # Source code and Example data (React + TypeScript)
+├── src/Utils/ExampleData      # Source code and example IDS logs
 ├── .gitignore
 ├── bun.lockb
 ├── components.json
@@ -84,29 +85,11 @@ firulais/
 └── vite.config.ts
 ```
 
-
 ---
 
-## 🧠 Summary
+## Summary
 
-Firulais gives security analysts a tool to **read and interpret IDS logs** easily, without giving up privacy.  
-Run it locally, clear your data when done, and trust that your network logs never leave your system.
+Firulais provides cybersecurity enthusiasts and security analysts with a private, easy-to-use tool for interpreting IDS logs. Run it locally to maintain full control over your data and generate meaningful insights—without relying on any third-party services.
 
----
 
-## 🐶 Why "Firulais"?
-
-Because even the most loyal dog knows how to guard the house — and your data.
-
----
-
-## 🤝 Contributions
-
-Feel free to open issues, suggest improvements, or submit PRs. Privacy-forward tooling is a team effort!
-
----
-
-## 📜 License
-
-MIT © 2025
 
