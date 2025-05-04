@@ -20,7 +20,6 @@ Whether you're trying to understand your network's behavior or compress verbose 
 - Llama.cpp for local LLM inference
 - Node.js + Vite
 - LocalStorage for temporary session data
-- Optional Vercel deployment for public demo use
 
 ---
 
